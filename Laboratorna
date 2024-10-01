@@ -1,0 +1,35 @@
+def find_countries_in_africa_or_asia(countries):
+    africa_asia_countries = []
+
+    for country in countries:
+        name = country['name']
+        region = country['region']
+        
+        if region == 'Africa' or region == 'Asia':
+            africa_asia_countries.append(name)
+
+    if africa_asia_countries:
+        print("Countries located in Africa or Asia:")
+        for country in africa_asia_countries:
+            print(country)
+    else:
+        print("No countries from Africa or Asia were found.")
+
+def main():
+    countries = [
+        {"name": "Egypt", "area": 1002450, "population": 102334404, "region": "Africa"},
+        {"name": "India", "area": 3287263, "population": 1380004385, "region": "Asia"},
+        {"name": "Germany", "area": 357022, "population": 83166711, "region": "Europe"},
+        {"name": "Brazil", "area": 8515767, "population": 212559417, "region": "South America"},
+        {"name": "Australia", "area": 7692024, "population": 25499884, "region": "Australia"},
+        {"name": "Japan", "area": 377975, "population": 126476461, "region": "Asia"},
+        {"name": "Canada", "area": 9984670, "population": 37742154, "region": "North America"},
+        {"name": "Nigeria", "area": 923768, "population": 206139589, "region": "Africa"},
+        {"name": "Russia", "area": 17098242, "population": 145912025, "region": "Europe"},
+        {"name": "China", "area": 9596961, "population": 1444216107, "region": "Asia"}
+    ]
+
+    find_countries_in_africa_or_asia(countries)
+
+if __name__ == "__main__":
+    main()

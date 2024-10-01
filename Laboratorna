@@ -1,12 +1,10 @@
+# Функція для пошуку країн у Африці чи Азії
 def find_countries_in_africa_or_asia(countries):
     africa_asia_countries = []
 
-    for country in countries:
-        name = country['name']
-        region = country['region']
-        
-        if region == 'Africa' or region == 'Asia':
-            africa_asia_countries.append(name)
+    for country, info in countries.items():
+        if info['region'] == 'Africa' or info['region'] == 'Asia':
+            africa_asia_countries.append(country)
 
     if africa_asia_countries:
         print("Countries located in Africa or Asia:")
@@ -15,21 +13,76 @@ def find_countries_in_africa_or_asia(countries):
     else:
         print("No countries from Africa or Asia were found.")
 
-def main():
-    countries = [
-        {"name": "Egypt", "area": 1002450, "population": 102334404, "region": "Africa"},
-        {"name": "India", "area": 3287263, "population": 1380004385, "region": "Asia"},
-        {"name": "Germany", "area": 357022, "population": 83166711, "region": "Europe"},
-        {"name": "Brazil", "area": 8515767, "population": 212559417, "region": "South America"},
-        {"name": "Australia", "area": 7692024, "population": 25499884, "region": "Australia"},
-        {"name": "Japan", "area": 377975, "population": 126476461, "region": "Asia"},
-        {"name": "Canada", "area": 9984670, "population": 37742154, "region": "North America"},
-        {"name": "Nigeria", "area": 923768, "population": 206139589, "region": "Africa"},
-        {"name": "Russia", "area": 17098242, "population": 145912025, "region": "Europe"},
-        {"name": "China", "area": 9596961, "population": 1444216107, "region": "Asia"}
-    ]
+# Функція для додавання нової країни
+def add_country(countries):
+    name = input("Enter the name of the country: ")
+    area = int(input("Enter the area of the country: "))
+    population = int(input("Enter the population of the country: "))
+    region = input("Enter the region of the country (e.g., Africa, Asia): ")
 
-    find_countries_in_africa_or_asia(countries)
+    countries[name] = {
+        "area": area,
+        "population": population,
+        "region": region
+    }
+    print(f"Country {name} has been added successfully!")
+
+# Функція для відображення всіх країн
+def display_countries(countries):
+    if not countries:
+        print("No countries available.")
+    else:
+        print("List of countries:")
+        for name, info in countries.items():
+            print(f"{name} - Area: {info['area']} sq km, Population: {info['population']}, Region: {info['region']}")
+
+# Функція для видалення країни
+def remove_country(countries):
+    name = input("Enter the name of the country to remove: ")
+    if name in countries:
+        del countries[name]
+        print(f"Country {name} has been removed successfully!")
+    else:
+        print(f"Country {name} not found!")
+
+# Основна функція для запуску програми і діалогу з користувачем
+def main():
+    countries = {
+        "Egypt": {"area": 1002450, "population": 102334404, "region": "Africa"},
+        "India": {"area": 3287263, "population": 1380004385, "region": "Asia"},
+        "Germany": {"area": 357022, "population": 83166711, "region": "Europe"},
+        "Brazil": {"area": 8515767, "population": 212559417, "region": "South America"},
+        "Australia": {"area": 7692024, "population": 25499884, "region": "Australia"},
+        "Japan": {"area": 377975, "population": 126476461, "region": "Asia"},
+        "Canada": {"area": 9984670, "population": 37742154, "region": "North America"},
+        "Nigeria": {"area": 923768, "population": 206139589, "region": "Africa"},
+        "Russia": {"area": 17098242, "population": 145912025, "region": "Europe"},
+        "China": {"area": 9596961, "population": 1444216107, "region": "Asia"}
+    }
+
+    while True:
+        print("\nMenu:")
+        print("1. Find countries in Africa or Asia")
+        print("2. Add a new country")
+        print("3. Display all countries")
+        print("4. Remove a country")
+        print("5. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            find_countries_in_africa_or_asia(countries)
+        elif choice == "2":
+            add_country(countries)
+        elif choice == "3":
+            display_countries(countries)
+        elif choice == "4":
+            remove_country(countries)
+        elif choice == "5":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice, please try again.")
 
 if __name__ == "__main__":
     main()
